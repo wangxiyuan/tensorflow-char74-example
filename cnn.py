@@ -13,7 +13,7 @@ import image_detection as detector
 batch_size = 64
 num_classes = 26
 epochs = 20
-img_rows, img_cols = 20, 20
+img_rows, img_cols = 28, 28
 
 print('Start loading data.')
 files, labels = helpers.load_chars74k_data()
@@ -77,45 +77,45 @@ print('Model has been trained.')
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 
-# Predict on detection-1.jpg
-detection1 = './detection-images/detection-1.jpg'
-samples1 = detector.sliding_window(detection1)
-
-samples_tf1 = samples1.reshape(samples1.shape[0], 20, 20, 1)
-samples_tf1 = samples_tf1.astype('float32')
-
-print('Start detection on example image: ', detection1)
-predictions1 = model.predict(samples_tf1)
-value_list1 = []
-
-for pred in predictions1:
-    i = 0
-    for value in pred:
-        if value > 0.9:
-            value_list1.append(helpers.num_to_char(i))
-
-        i += 1
-
-
-print('Predicted values on', detection1, Counter(value_list1))
-
-# Predict on detection-2.jpg
-detection2 = './detection-images/detection-2.jpg'
-samples2 = detector.sliding_window(detection2)
-
-samples_tf2 = samples2.reshape(samples2.shape[0], 20, 20, 1)
-samples_tf2 = samples_tf2.astype('float32')
-
-print('Start detection on example image: ', detection2)
-predictions2 = model.predict(samples_tf2)
-value_list2 = []
-
-for pred2 in predictions2:
-    i = 0
-    for value2 in pred2:
-        if value2 > 0.9:
-            value_list2.append(helpers.num_to_char(i))
-
-        i += 1
-
-print('Predicted values on', detection2, Counter(value_list2))
+# # Predict on detection-1.jpg
+# detection1 = './detection-images/detection-1.jpg'
+# samples1 = detector.sliding_window(detection1)
+#
+# samples_tf1 = samples1.reshape(samples1.shape[0], 20, 20, 1)
+# samples_tf1 = samples_tf1.astype('float32')
+#
+# print('Start detection on example image: ', detection1)
+# predictions1 = model.predict(samples_tf1)
+# value_list1 = []
+#
+# for pred in predictions1:
+#     i = 0
+#     for value in pred:
+#         if value > 0.9:
+#             value_list1.append(helpers.num_to_char(i))
+#
+#         i += 1
+#
+#
+# print('Predicted values on', detection1, Counter(value_list1))
+#
+# # Predict on detection-2.jpg
+# detection2 = './detection-images/detection-2.jpg'
+# samples2 = detector.sliding_window(detection2)
+#
+# samples_tf2 = samples2.reshape(samples2.shape[0], 20, 20, 1)
+# samples_tf2 = samples_tf2.astype('float32')
+#
+# print('Start detection on example image: ', detection2)
+# predictions2 = model.predict(samples_tf2)
+# value_list2 = []
+#
+# for pred2 in predictions2:
+#     i = 0
+#     for value2 in pred2:
+#         if value2 > 0.9:
+#             value_list2.append(helpers.num_to_char(i))
+#
+#         i += 1
+#
+# print('Predicted values on', detection2, Counter(value_list2))

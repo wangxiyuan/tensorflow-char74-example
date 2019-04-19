@@ -33,11 +33,11 @@ def load_chars74k_data(dir="chars74k-lite"):
 
     for path, dirs, files in os.walk(dir):
         for file in files:
-            if file.endswith('.jpg'):
+            if file.endswith('.png'):
                 file = path + '/' + file
                 filenames.append(file)
 
-                label = path[-1:]
+                label = int(path[-2:])
                 label_list.append(label)
 
     return filenames, label_list
@@ -46,7 +46,7 @@ def load_chars74k_data(dir="chars74k-lite"):
 # Creates the dataset.
 def create_dataset(file_paths, label_set, with_denoising=False):
     data_x = []
-    data_y = []
+    data_y = label_set
 
     for path in file_paths:
         single_x = np.asarray(PIL.Image.open(path)).flatten()
@@ -55,10 +55,6 @@ def create_dataset(file_paths, label_set, with_denoising=False):
         if with_denoising:
             single_x = cv2.fastNlMeansDenoising(single_x).flatten()
         data_x.append(single_x)
-
-    for l in label_set:
-        l_to_num = char_to_num(l)
-        data_y.append(l_to_num)
 
     np_data_x = np.array(data_x)
     np_data_y = np.array(data_y)
