@@ -37,7 +37,7 @@ def load_chars74k_data(dir="chars74k-lite"):
                 file = path + '/' + file
                 filenames.append(file)
 
-                label = int(path[-2:])
+                label = int(path[-2:]) - 1
                 label_list.append(label)
 
     return filenames, label_list
